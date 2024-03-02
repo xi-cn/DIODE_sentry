@@ -1,0 +1,32 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="OccupyBenefitTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Sequence>
+        <MoveBase goal="middle"/>
+        <ReactiveFallback>
+          <Sequence>
+            <GuardHurt/>
+            <MoveBase goal="my_recharge"/>
+          </Sequence>
+          <Sequence>
+            <Inverter>
+              <WhtherOccupyBenefit/>
+            </Inverter>
+            <Fallback>
+              <Sequence>
+                <Attacking/>
+                <AlwaysSuccess/>
+              </Sequence>
+              <Sequence>
+                <BloodLess200/>
+                <MoveBase goal="my_recharge"/>
+              </Sequence>
+            </Fallback>
+          </Sequence>
+        </ReactiveFallback>
+      </Sequence>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

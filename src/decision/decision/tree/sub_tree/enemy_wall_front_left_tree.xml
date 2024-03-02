@@ -1,0 +1,85 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="EnemyWallFrontLeftTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Fallback>
+        <Sequence>
+          <GuardHurt/>
+          <MoveBase goal="my_recharge"/>
+        </Sequence>
+        <BaseBeenAttacked/>
+        <Sequence>
+          <InferiorSituation/>
+          <ReactiveFallback>
+            <Sequence>
+              <Attacking/>
+              <WalkingAround/>
+            </Sequence>
+            <Sequence>
+              <MoveBase goal="my_domain_left"/>
+              <WaitForSeconds sec="5"/>
+            </Sequence>
+          </ReactiveFallback>
+        </Sequence>
+        <Fallback>
+          <Sequence>
+            <WhtherOccupyBenefit/>
+            <AlwaysSuccess/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_guard"/>
+            <TraceEnemy robot_name="enemy_guard"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r1"/>
+            <TraceEnemy robot_name="enemy_r1"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r3"/>
+            <TraceEnemy robot_name="enemy_r3"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r4"/>
+            <TraceEnemy robot_name="enemy_r4"/>
+          </Sequence>
+        </Fallback>
+        <Sequence>
+          <EnemyAllKilled/>
+          <Sequence>
+            <TimeLessOneMin/>
+            <WaitForSeconds sec="2"/>
+          </Sequence>
+          <Sequence>
+            <BloodLess200/>
+            <MoveBase goal="my_recharge"/>
+          </Sequence>
+          <WaitForSeconds sec="1"/>
+        </Sequence>
+        <Fallback>
+          <Sequence>
+            <MoveBase goal="enemy_wall_front_right"/>
+            <FindEnemy robot_name="any"/>
+            <TraceEnemy robot_name="any"/>
+          </Sequence>
+          <Sequence>
+            <MoveBase goal="middle_right"/>
+            <FindEnemy robot_name="any"/>
+            <TraceEnemy robot_name="any"/>
+          </Sequence>
+          <Sequence>
+            <MoveBase goal="middle_left"/>
+            <FindEnemy robot_name="any"/>
+            <TraceEnemy robot_name="any"/>
+          </Sequence>
+          <Sequence>
+            <MoveBase goal="my_domain_left"/>
+            <FindEnemy robot_name="any"/>
+            <TraceEnemy robot_name="any"/>
+          </Sequence>
+          <AlwaysSuccess/>
+        </Fallback>
+      </Fallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

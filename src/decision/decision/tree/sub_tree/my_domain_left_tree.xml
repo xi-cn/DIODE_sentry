@@ -1,0 +1,72 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="MyDomainLeftTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Fallback>
+        <Sequence>
+          <GuardHurt/>
+          <MoveBase goal="my_recharge"/>
+        </Sequence>
+        <Sequence>
+          <InferiorSituation/>
+          <ReactiveFallback>
+            <Sequence>
+              <Attacking/>
+              <WalkingAround/>
+            </Sequence>
+            <Sequence>
+              <MoveBase goal="my_base_entry"/>
+              <WaitForSeconds sec="5"/>
+            </Sequence>
+          </ReactiveFallback>
+        </Sequence>
+        <Sequence>
+          <FavorableSituation/>
+          <ReactiveFallback>
+            <Fallback>
+              <Sequence>
+                <FindEnemy robot_name="enemy_guard"/>
+                <TraceEnemy robot_name="enemy_guard"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r1"/>
+                <TraceEnemy robot_name="enemy_r1"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r3"/>
+                <TraceEnemy robot_name="enemy_r3"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r4"/>
+                <TraceEnemy robot_name="enemy_r4"/>
+              </Sequence>
+              <Sequence>
+                <WhtherOccupyBenefit/>
+                <AlwaysSuccess/>
+              </Sequence>
+            </Fallback>
+            <Sequence>
+              <MoveBase goal="middle_left"/>
+              <WaitForSeconds sec="3"/>
+            </Sequence>
+          </ReactiveFallback>
+        </Sequence>
+        <Sequence>
+          <Sequence>
+            <Attacking/>
+            <WalkingAround/>
+          </Sequence>
+          <Sequence>
+            <WhtherOccupyBenefit/>
+            <AlwaysSuccess/>
+          </Sequence>
+          <Sequence>
+            <FindAlly/>
+            <FollowAlly/>
+          </Sequence>
+        </Sequence>
+      </Fallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

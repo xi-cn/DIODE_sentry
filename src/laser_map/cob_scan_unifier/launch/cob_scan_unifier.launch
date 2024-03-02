@@ -1,0 +1,8 @@
+<launch>
+
+    <node pkg="cob_scan_unifier" name="scan_unifier_node" type="scan_unifier_node">
+        <param name="frame" value="laser"/>
+        <rosparam param="input_scans">['/scan_3d', '/scan_2d']</rosparam>
+    </node>
+
+</launch>

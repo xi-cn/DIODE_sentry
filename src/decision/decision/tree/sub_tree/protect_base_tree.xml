@@ -1,0 +1,71 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="ProtectBaseTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Fallback>
+        <Sequence>
+          <MoveBase goal="my_base_entry"/>
+          <Fallback>
+            <Fallback>
+              <Sequence>
+                <FindEnemy robot_name="enemy_guard"/>
+                <TraceEnemy robot_name="enemy_guard"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r1"/>
+                <TraceEnemy robot_name="enemy_r1"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r3"/>
+                <TraceEnemy robot_name="enemy_r3"/>
+              </Sequence>
+              <Sequence>
+                <FindEnemy robot_name="enemy_r4"/>
+                <TraceEnemy robot_name="enemy_r4"/>
+              </Sequence>
+              <AlwaysFailure/>
+            </Fallback>
+            <Inverter>
+              <BaseBeenAttacked/>
+            </Inverter>
+            <Sequence>
+              <MoveBase goal="my_base_up_right"/>
+              <IfThenElse>
+                <Fallback>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <FindEnemy robot_name="enemy_r1"/>
+                  <FindEnemy robot_name="enemy_r3"/>
+                  <FindEnemy robot_name="enemy_r4"/>
+                </Fallback>
+                <WaitForSeconds sec="3"/>
+                <AlwaysFailure/>
+              </IfThenElse>
+            </Sequence>
+            <Inverter>
+              <BaseBeenAttacked/>
+            </Inverter>
+            <Sequence>
+              <MoveBase goal="my_base_down_right"/>
+              <IfThenElse>
+                <Fallback>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <FindEnemy robot_name="enemy_r1"/>
+                  <FindEnemy robot_name="enemy_r3"/>
+                  <FindEnemy robot_name="enemy_r4"/>
+                </Fallback>
+                <WaitForSeconds sec="3"/>
+                <AlwaysFailure/>
+              </IfThenElse>
+            </Sequence>
+            <Inverter>
+              <BaseBeenAttacked/>
+            </Inverter>
+            <MoveBase goal="my_base_down_left"/>
+            <MoveBase goal="my_base_up_left"/>
+          </Fallback>
+        </Sequence>
+      </Fallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

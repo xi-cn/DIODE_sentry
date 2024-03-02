@@ -1,0 +1,35 @@
+<launch>
+  <arg name="car_mode"  default="" />
+
+  <!-- 用于robot_state_publisher节点-->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_link" args="0.14 -0.09 0.60 1.57 0 3.14 camera base_link 100" /> -->
+  <node pkg="tf" type="static_transform_publisher" name="base_to_link" args="-0.09 0.14 0.60 -1.57 0 3.14 base_link camera 100" />
+  
+  <!--静态坐标变换，需要实测 -->
+  <!-- car_mode and tf  mini_mec-->
+  <group if="$(eval car_mode == 'mini_mec')">
+      <!-- 雷达到底盘-->
+      <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser_2d" args="0.01 -0.18 0.3 1.7 0 0  base_footprint laser_2d 100" /> -->
+      <node pkg="tf" type="static_transform_publisher" name="base_to_laser_3d" args="-0.09 0.14 0.60 -1.57 0 3.14 base_footprint laser_3d 100" />
+      <node pkg="tf" type="static_transform_publisher" name="base_to_livox" args="0 0 0 0 0 0 camera livox_frame 100" />
+      <node pkg="tf" type="static_transform_publisher" name="laser_to_base" args="0.14 -0.09 0.60 -1.57 0 3.14 camera base_footprint 100" />
+      <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0.3 0 0 0  base_footprint laser 100" /> -->
+      <!-- 摄像头到底盘-->
+      <node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="0.12 0 0.15 0 0 0   base_footprint camera_link 100" />
+      <!-- imu到底盘 -->
+      <node pkg="tf" type="static_transform_publisher" name="base_to_gyro" args="-0 -0.17 0 0 0 0 base_link gyro_link 100" />
+  </group>
+  
+  <!-- URDF 标准化机器人描述格式 -->
+  <group if="$(eval car_mode == 'mini_mec')">
+      <param name = "robot_description" textfile = "$(find turn_on_diode_robot)/urdf/mini_mec_robot.urdf"/> 
+  </group>
+  
+  <!-- 读取urdf信息(robot_description) 发布话题：/joint_states-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />s
+  <!-- 订阅话题：/joint_states，发布小车TF信息-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+ </launch>
+
+

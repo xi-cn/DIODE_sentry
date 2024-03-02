@@ -1,0 +1,61 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="EnemyGuardDefendTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Sequence>
+        <Fallback>
+          <PositionOverHalf/>
+          <MoveBase goal="middle_right"/>
+        </Fallback>
+        <WaitForSeconds sec="5"/>
+        <Fallback>
+          <Sequence>
+            <GuardHurt/>
+            <MoveBase goal="my_recharge"/>
+          </Sequence>
+          <Sequence>
+            <InferiorSituation/>
+            <IfThenElse>
+              <AllyStayBy/>
+              <AlwaysFailure/>
+              <MoveBase goal="my_wall_back_right"/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardKilled/>
+            <IfThenElse>
+              <EnemyAttackSlowly/>
+              <IfThenElse>
+                <LowBlood/>
+                <MoveBase goal="my_recharge"/>
+                <MoveBase goal="enemy_wall_front_right"/>
+              </IfThenElse>
+              <AlwaysFailure/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardDisappear/>
+            <IfThenElse>
+              <LowBlood/>
+              <MoveBase goal="my_recharge"/>
+              <MoveBase goal="enemy_wall_right"/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardRetraitR/>
+            <IfThenElse>
+              <LowBlood/>
+              <MoveBase goal="my_recharge"/>
+              <MoveBase goal="enemy_wall_front_right"/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <LowEfficience/>
+            <MoveBase goal="enemy_wall_right"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

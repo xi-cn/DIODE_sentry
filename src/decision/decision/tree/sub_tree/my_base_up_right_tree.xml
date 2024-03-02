@@ -1,0 +1,26 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="MyBaseUpRightTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <ReactiveFallback>
+        <Sequence>
+          <GuardHurt/>
+          <MoveBase goal="my_recharge"/>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <FindEnemy robot_name="enemy_guard"/>
+            <FindEnemy robot_name="enemy_r1"/>
+            <FindEnemy robot_name="enemy_r3"/>
+            <FindEnemy robot_name="enemy_r4"/>
+          </Fallback>
+          <AlwaysFailure/>
+        </Sequence>
+        <Sequence>
+          <MoveBase goal="my_base_up_left"/>
+        </Sequence>
+      </ReactiveFallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

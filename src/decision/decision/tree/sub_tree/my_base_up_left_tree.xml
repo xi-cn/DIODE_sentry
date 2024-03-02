@@ -1,0 +1,9 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="MyBaseUpLeftTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <MoveBase goal="my_base_entry"/>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

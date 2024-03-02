@@ -1,0 +1,67 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="EnemyGuardComeTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Sequence>
+        <MoveBase goal="benefit_left"/>
+        <WaitForSeconds sec="5"/>
+        <Fallback>
+          <Sequence>
+            <GuardHurt/>
+            <MoveBase goal="my_recharge"/>
+          </Sequence>
+          <Sequence>
+            <InferiorSituation/>
+            <IfThenElse>
+              <AllyStayBy/>
+              <AlwaysFailure/>
+              <MoveBase goal="my_wall_back_left"/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardKilled/>
+            <IfThenElse>
+              <EnemyAttackSlowly/>
+              <IfThenElse>
+                <LowBlood/>
+                <MoveBase goal="my_recharge"/>
+                <MoveBase goal="enemy_wall_front_right"/>
+              </IfThenElse>
+              <AlwaysFailure/>
+            </IfThenElse>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardDisappear/>
+            <Sequence>
+              <MoveBase goal="middle_left"/>
+              <WaitForSeconds sec="3"/>
+              <Fallback>
+                <Sequence>
+                  <EnemyGuardInMyDomain/>
+                  <MoveBase goal="my_wall_back_left"/>
+                </Sequence>
+                <Sequence>
+                  <EnemyGuardInEnemyDomain/>
+                  <MoveBase goal="enemy_wall_left"/>
+                </Sequence>
+                <Sequence>
+                  <EnemyGuardInUnknowDomain/>
+                  <MoveBase goal="enemy_wall_right"/>
+                </Sequence>
+              </Fallback>
+            </Sequence>
+          </Sequence>
+          <Sequence>
+            <EnemyGuardRetraitL/>
+            <MoveBase goal="enemy_wall_left"/>
+          </Sequence>
+          <Sequence>
+            <LowEfficience/>
+            <MoveBase goal="middle_right"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

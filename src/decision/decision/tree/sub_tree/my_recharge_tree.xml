@@ -1,0 +1,49 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="MyRechargeTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <IfThenElse>
+        <RecoverFinished/>
+        <Fallback>
+          <Sequence>
+            <FindEnemy robot_name="enemy_guard"/>
+            <TraceEnemy robot_name="enemy_guard"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r1"/>
+            <TraceEnemy robot_name="enemy_r1"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r3"/>
+            <TraceEnemy robot_name="enemy_r3"/>
+          </Sequence>
+          <Sequence>
+            <FindEnemy robot_name="enemy_r4"/>
+            <TraceEnemy robot_name="enemy_r4"/>
+          </Sequence>
+          <Sequence>
+            <BaseBeenAttacked/>
+            <AlwaysSuccess/>
+          </Sequence>
+          <Sequence>
+            <WhtherOccupyBenefit/>
+            <AlwaysSuccess/>
+          </Sequence>
+          <Sequence>
+            <InferiorSituation/>
+            <MoveBase goal="my_domain_right"/>
+          </Sequence>
+          <Sequence>
+            <FavorableSituation/>
+            <MoveBase goal="enemy_wall_right"/>
+          </Sequence>
+          <Sequence>
+            <MoveBase goal="my_wall_right"/>
+          </Sequence>
+        </Fallback>
+        <AlwaysFailure/>
+      </IfThenElse>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

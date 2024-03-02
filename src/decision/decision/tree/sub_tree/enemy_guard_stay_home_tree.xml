@@ -1,0 +1,98 @@
+<root BTCPP_format="4">
+
+  <BehaviorTree ID="EnemyGuardStayHomeTree">
+    <RetryUntilSuccessful num_attempts="-1">
+      <Fallback>
+        <Sequence>
+          <GuardHurt/>
+          <MoveBase goal="my_recharge"/>
+        </Sequence>
+        <Sequence>
+          <InferiorSituation/>
+          <IfThenElse>
+            <AllyStayBy/>
+            <AlwaysFailure/>
+            <MoveBase goal="my_wall_back_mid"/>
+          </IfThenElse>
+        </Sequence>
+        <Sequence>
+          <EnemyGuardKilled/>
+          <Fallback>
+            <Sequence>
+              <BloodOver200/>
+              <EnemyAttackSlowly/>
+              <MoveBase goal="enemy_wall_front_right"/>
+            </Sequence>
+            <Sequence>
+              <EnemyAttackSlowly/>
+              <MoveBase goal="my_recharge"/>
+            </Sequence>
+            <AlwaysFailure/>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <EnemyGuardDisappear/>
+          <IfThenElse>
+            <Sequence>
+              <LowEfficience/>
+              <LowBlood/>
+            </Sequence>
+            <Fallback>
+              <Sequence>
+                <MoveBase goal="middle_right"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysFailure/>
+                </IfThenElse>
+              </Sequence>
+              <Sequence>
+                <MoveBase goal="middle_left"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysFailure/>
+                </IfThenElse>
+              </Sequence>
+              <Sequence>
+                <MoveBase goal="my_domain_left"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysFailure/>
+                </IfThenElse>
+              </Sequence>
+            </Fallback>
+            <Fallback>
+              <Sequence>
+                <MoveBase goal="enemy_wall_front_left"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysFailure/>
+                </IfThenElse>
+              </Sequence>
+              <Sequence>
+                <MoveBase goal="middle_left"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysFailure/>
+                </IfThenElse>
+              </Sequence>
+              <Sequence>
+                <MoveBase goal="my_wall_right"/>
+                <IfThenElse>
+                  <FindEnemy robot_name="enemy_guard"/>
+                  <TraceEnemy robot_name="enemy_guard"/>
+                  <AlwaysSuccess/>
+                </IfThenElse>
+              </Sequence>
+            </Fallback>
+          </IfThenElse>
+        </Sequence>
+      </Fallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
+</root>

@@ -1,0 +1,145 @@
+<root BTCPP_format="4">
+
+  <include path="sub_tree/enemy_guard_come_tree.xml"/>
+  <include path="sub_tree/enemy_guard_defend_tree.xml"/>
+  <include path="sub_tree/enemy_guard_stay_home_tree.xml"/>
+  <include path="sub_tree/enemy_wall_front_left_tree.xml"/>
+  <include path="sub_tree/enemy_wall_front_right_tree.xml"/>
+  <include path="sub_tree/enemy_wall_left_tree.xml"/>
+  <include path="sub_tree/enemy_wall_right_tree.xml"/>
+  <include path="sub_tree/main_tree.xml"/>
+  <include path="sub_tree/middle_left_tree.xml"/>
+  <include path="sub_tree/middle_right_tree.xml"/>
+  <include path="sub_tree/middle_tree.xml"/>
+  <include path="sub_tree/my_base_down_left_tree.xml"/>
+  <include path="sub_tree/my_base_down_right_tree.xml"/>
+  <include path="sub_tree/my_base_entry_tree.xml"/>
+  <include path="sub_tree/my_base_up_left_tree.xml"/>
+  <include path="sub_tree/my_base_up_right_tree.xml"/>
+  <include path="sub_tree/my_domain_left_tree.xml"/>
+  <include path="sub_tree/my_recharge_tree.xml"/>
+  <include path="sub_tree/my_wall_left_tree.xml"/>
+  <include path="sub_tree/my_wall_right_tree.xml"/>
+  <include path="sub_tree/occupy_benefit_tree.xml"/>
+  <include path="sub_tree/protect_base_tree.xml"/>
+
+  <BehaviorTree ID="MainTree">
+    <ReactiveSequence>
+      <RosOk/>
+      <RetryUntilSuccessful num_attempts="-1">
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <IsBeginningState/>
+              <ReactiveFallback>
+                <Sequence>
+                  <Inverter>
+                    <StateLocked/>
+                  </Inverter>
+                  <EnemyGuardCome/>
+                  <LockState/>
+                  <SubTree ID="EnemyGuardComeTree"
+                           _autoremap="false"/>
+                </Sequence>
+                <Sequence>
+                  <Inverter>
+                    <StateLocked/>
+                  </Inverter>
+                  <EnemyGuardDefend/>
+                  <LockState/>
+                  <SubTree ID="EnemyGuardDefendTree"
+                           _autoremap="false"/>
+                </Sequence>
+                <Sequence>
+                  <MoveBase goal="enemy_wall_right"/>
+                  <LockState/>
+                  <SubTree ID="EnemyGuardStayHomeTree"
+                           _autoremap="false"/>
+                </Sequence>
+              </ReactiveFallback>
+              <EndBeginningState/>
+            </Sequence>
+            <Sequence>
+              <BaseBeenAttacked/>
+              <SubTree ID="ProtectBaseTree"
+                       _autoremap="false"/>
+            </Sequence>
+            <Sequence>
+              <WhtherOccupyBenefit/>
+              <SubTree ID="OccupyBenefitTree"
+                       _autoremap="false"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_recharge"/>
+              <SubTree ID="MyRechargeTree"
+                       _autoremap="false"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_base_down_left"/>
+              <SubTree ID="MyBaseDownLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_base_down_left"/>
+              <SubTree ID="MyBaseDownRightTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_base_up_right"/>
+              <SubTree ID="MyBaseUpRightTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_base_up_left"/>
+              <SubTree ID="MyBaseUpLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_base_entry"/>
+              <SubTree ID="MyBaseEntryTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_domain_left"/>
+              <SubTree ID="MyDomainLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_wall_left"/>
+              <SubTree ID="MyWallLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="my_wall_right"/>
+              <SubTree ID="MyWallRightTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="middle_left"/>
+              <SubTree ID="MiddleLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="middle"/>
+              <SubTree ID="MiddleTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="middle_right"/>
+              <SubTree ID="MiddleRightTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="enemy_wall_left"/>
+              <SubTree ID="EnemyWallLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="enemy_wall_right"/>
+              <SubTree ID="EnemyWallRightTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="enemy_wall_front_left"/>
+              <SubTree ID="EnemyWallFrontLeftTree"/>
+            </Sequence>
+            <Sequence>
+              <NearPosition pos="enemy_wall_right_left"/>
+              <SubTree ID="EnemyWallFrontRightTree"/>
+            </Sequence>
+          </Fallback>
+          <IsGameOver/>
+        </Sequence>
+      </RetryUntilSuccessful>
+    </ReactiveSequence>
+  </BehaviorTree>
+
+
+</root>

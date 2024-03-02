@@ -1,0 +1,51 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/dhu/catkin_google_ws/install_isolated/include/**",
+        "/home/dhu/DIODE_sentry/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/PointCloud_To_LasarScan/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/amcl/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/base_local_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/behaviortree_cpp/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/carrot_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/clear_costmap_recovery/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/cob_scan_unifier/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/costmap_2d/include/**",
+        "/home/dhu/DIODE_sentry/src/decision/decision/include/**",
+        "/home/dhu/DIODE_sentry/src/decision/decision_nodes/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/dwa_local_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/FAST_LIO/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/global_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/linefit_ground_segmentation/linefit_ground_segmentation/include/**",
+        "/home/dhu/DIODE_sentry/src/rm_simulation/livox_laser_simulation/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/lsn10/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/map_server/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/move_base/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/move_slow_and_clear/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/nav_core/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/navfn/include/**",
+        "/home/dhu/DIODE_sentry/src/robot_pose_ekf/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/rotate_recovery/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/teb_local_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/rm_simulation/tele_control/include/**",
+        "/home/dhu/DIODE_sentry/src/turn_on_diode_robot/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/twr_local_planner/include/**",
+        "/home/dhu/DIODE_sentry/src/navigation/voxel_grid/include/**",
+        "/home/dhu/DIODE_sentry/src/laser_map/wj_716N_lidar/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
